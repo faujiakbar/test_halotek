@@ -1,0 +1,260 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API TEST Halotek",
+        "description": "This is a public API. Provide by [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "faujiakbar@gmail.com"
+        },
+        "version": "0.0.0"
+    },
+    "paths": {
+        "/auth/in": {
+            "post": {
+                "tags": [
+                    "Authorized"
+                ],
+                "summary": "Get user token for access API",
+                "description": "",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "show token"
+                    }
+                }
+            }
+        },
+        "/auth/reg": {
+            "post": {
+                "tags": [
+                    "Authorized"
+                ],
+                "summary": "Register user for access API",
+                "description": "",
+                "operationId": "register",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email user for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Fullname of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registered and get id"
+                    }
+                }
+            }
+        },
+        "/auth/del": {
+            "post": {
+                "tags": [
+                    "Authorized"
+                ],
+                "summary": "Delete user for access API",
+                "description": "",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id from last user created",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hard delete user from database"
+                    }
+                },
+                "security": [
+                    {
+                        "authorization": []
+                    }
+                ]
+            }
+        },
+        "/auth/list": {
+            "get": {
+                "tags": [
+                    "Authorized"
+                ],
+                "summary": "List of User was created",
+                "description": "",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "list of user was created"
+                    }
+                },
+                "security": [
+                    {
+                        "authorization": []
+                    }
+                ]
+            }
+        },
+        "/": {
+            "post": {
+                "tags": [
+                    "System"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lumen Version"
+                    }
+                }
+            }
+        },
+        "/prodi/add": {
+            "post": {
+                "tags": [
+                    "Prodi"
+                ],
+                "summary": "Add prodi",
+                "description": "",
+                "operationId": "add",
+                "parameters": [
+                    {
+                        "name": "prodi_name",
+                        "in": "query",
+                        "description": "Name of prodi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "prodi_program",
+                        "in": "query",
+                        "description": "Program in prodi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "prodi_level",
+                        "in": "query",
+                        "description": "Prodi level (Choose: Master/Bachelor)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created Prodi"
+                    }
+                },
+                "security": [
+                    {
+                        "authorization": []
+                    }
+                ]
+            }
+        },
+        "/prodi/list": {
+            "get": {
+                "tags": [
+                    "Prodi"
+                ],
+                "summary": "List of Prodi was created",
+                "description": "",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "list of prodi was created"
+                    }
+                }
+            }
+        },
+        "/prodi/del": {
+            "post": {
+                "tags": [
+                    "Prodi"
+                ],
+                "summary": "Delete Prodi",
+                "description": "",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id from list prodi created",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hard delete prodi from database"
+                    }
+                },
+                "security": [
+                    {
+                        "authorization": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "authorization": {
+                "type": "apiKey",
+                "name": "authorization",
+                "in": "header"
+            }
+        }
+    }
+}
